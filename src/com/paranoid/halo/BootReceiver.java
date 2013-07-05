@@ -14,7 +14,9 @@ public class BootReceiver extends BroadcastReceiver {
                 NotificationManager notificationManager =
                         (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 for(String packageName : packages){
-                    Utils.createNotification(context, notificationManager, new Package(packageName, R.drawable.ic_status));
+                	// Upon boot onReceive, there needs to be a way to retrieve the package's customStatusBarIcon that can be passed to Utils.createNotification as a Package
+                	// The best would be to be able to extract this from the packages default status bar icon
+                    Utils.createNotification(context, notificationManager, /*packageName and customStatusBarIcon passed to create notification*/ new Package(packageName, R.drawable.ic_status));
                 }
             }
         }

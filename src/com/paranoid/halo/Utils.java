@@ -160,12 +160,12 @@ public class Utils {
     }
 
     public static void createNotification(Context context, NotificationManager notificationManager,
-                                          Package p){
+                                   /*Passed in a package that has a package name + custom icon*/ Package p){
         try {
             String appName = Utils.getApplicationName(p.getPackageName(), context);
             Notification.Builder mBuilder =
                     new Notification.Builder(context)
-                            .setSmallIcon(p.getCustomIcon())
+                            .setSmallIcon(/*package's custom icon*/ p.getCustomIcon())
                             .setAutoCancel(false)
                             .setLargeIcon(Utils.getApplicationIcon(p.getPackageName(), context))
                             .setContentTitle(appName)

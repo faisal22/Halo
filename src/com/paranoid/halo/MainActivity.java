@@ -263,8 +263,13 @@ public class MainActivity extends PreferenceActivity {
                     .getSummary().toString();
             items.add(packageName);
             if(create && mShowing){
-                int customStatusBarIcon = /*Set custom status bar icon*/ R.drawable.ic_status;
-            	Utils.createNotification(mContext, mNotificationManager, new Package(packageName, customStatusBarIcon));
+            	// We can set a custom small icon here to be sent to Utils.createNotification. 
+            	//This can achieved in two ways
+            	// 1) either using a file chooser 
+            	// 2) somehow getting the default small icon for this specific package from android system [preferred]
+                int customStatusBarIcon = /* set custom status bar icon [default = R.drawable.ic_status] */ R.drawable.ic_status;
+
+                Utils.createNotification(mContext, mNotificationManager, /*create new package with packageName, customStatusBarIcon*/ new Package(packageName, customStatusBarIcon));
             }
         }
         Utils.saveArray(items.toArray(new String[items.size()]), mContext);

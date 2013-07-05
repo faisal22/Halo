@@ -21,7 +21,9 @@ public class MainApplication extends Application {
                 NotificationManager notificationManager =
                         (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
                 for(String packageName : packages){
-                    Utils.createNotification(this, notificationManager, new Package(packageName, R.drawable.ic_status));
+                	// Upon onCreate, there needs to be a way to retrieve the package's customStatusBarIcon that can be passed to Utils.createNotification as a Package
+                	// The best would be to be able to extract this from the packages default status bar icon
+                    Utils.createNotification(this, notificationManager, /*packageName and customStatusBarIcon passed to createNotification*/ new Package(packageName, R.drawable.ic_status));
                 }
             }
         }
