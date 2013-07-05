@@ -14,7 +14,7 @@ public class BootReceiver extends BroadcastReceiver {
                 NotificationManager notificationManager =
                         (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 for(String packageName : packages){
-                    Utils.createNotification(context, notificationManager, packageName);
+                    Utils.createNotification(context, notificationManager, new Package(packageName, R.drawable.ic_status));
                 }
             }
         }

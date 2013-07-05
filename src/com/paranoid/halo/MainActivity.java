@@ -160,6 +160,7 @@ public class MainActivity extends PreferenceActivity {
                                         mRoot.addPreference(mPreference);
                                         invalidateOptionsMenu();
                                         dialog.cancel();
+                                                                                
                                         switch(which) {
                                             case 0: // Default
                                                 savePreferenceItems(true);
@@ -196,8 +197,10 @@ public class MainActivity extends PreferenceActivity {
                                     }
                                 }
                                 );
+                        
+                        
                         AlertDialog dialog = builder.create();
-                        dialog.show();
+                        dialog.show(); 
                     }
                 });
                 dialog.show();
@@ -252,14 +255,17 @@ public class MainActivity extends PreferenceActivity {
                 break;
         }
     }
-    
+        
     public void savePreferenceItems(boolean create){
         ArrayList<String> items = new ArrayList<String>();
         for(int i = 0; i<mRoot.getPreferenceCount(); i++){
             String packageName = mRoot.getPreference(i)
                     .getSummary().toString();
             items.add(packageName);
-            if(create && mShowing) Utils.createNotification(mContext, mNotificationManager, packageName);
+            if(create && mShowing){
+                int customStatusBarIcon = /*Set custom status bar icon*/ R.drawable.ic_status;
+            	Utils.createNotification(mContext, mNotificationManager, new Package(packageName, customStatusBarIcon));
+            }
         }
         Utils.saveArray(items.toArray(new String[items.size()]), mContext);
     }

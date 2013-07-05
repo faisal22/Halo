@@ -160,17 +160,17 @@ public class Utils {
     }
 
     public static void createNotification(Context context, NotificationManager notificationManager,
-                                          String packageName){
+                                          Package p){
         try {
-            String appName = Utils.getApplicationName(packageName, context);
+            String appName = Utils.getApplicationName(p.getPackageName(), context);
             Notification.Builder mBuilder =
                     new Notification.Builder(context)
-                            .setSmallIcon(R.drawable.ic_status)
+                            .setSmallIcon(p.getCustomIcon())
                             .setAutoCancel(false)
-                            .setLargeIcon(Utils.getApplicationIcon(packageName, context))
+                            .setLargeIcon(Utils.getApplicationIcon(p.getPackageName(), context))
                             .setContentTitle(appName)
                             .setContentText(context.getString(R.string.tap_to_launch));
-            Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+            Intent intent = context.getPackageManager().getLaunchIntentForPackage(p.getPackageName());
             PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
                     intent, 0);
             mBuilder.setContentIntent(contentIntent);
@@ -178,7 +178,7 @@ public class Utils {
             notif.flags |= Notification.FLAG_ONGOING_EVENT;
             notif.priority = Notification.PRIORITY_MIN;
             notif.tickerText = appName;
-            notificationManager.notify(Utils.getStringHash(packageName), notif);
+            notificationManager.notify(Utils.getStringHash(p.getPackageName()), notif);
         } catch(NullPointerException npe) {
             // Skip this application
         }

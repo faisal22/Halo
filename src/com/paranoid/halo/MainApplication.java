@@ -21,7 +21,7 @@ public class MainApplication extends Application {
                 NotificationManager notificationManager =
                         (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
                 for(String packageName : packages){
-                    Utils.createNotification(this, notificationManager, packageName);
+                    Utils.createNotification(this, notificationManager, new Package(packageName, R.drawable.ic_status));
                 }
             }
         }
